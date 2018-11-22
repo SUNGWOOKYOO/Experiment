@@ -854,7 +854,7 @@ public static void PrintWhereDoubleAnd() {
                         BlockNestJoinTool etc = new BlockNestJoinTool();
                         // [after Join, print - Join case]
                         if((Tname.size() >= 2)) {
-                          //etc.JoinPrint();
+                          etc.JoinPrint();
                           System.out.println("Previous join ...");
                           join.BlockNestedJoin(Bsize, RecordPerPage);
                           System.out.println("after join ...");

@@ -49,8 +49,8 @@ public class Join {
 			FileWriter OUTPUT = new FileWriter(WritePath);
 			etc.ConstructCatalogInfo(INPUT1, SmallerT);
 			etc.ConstructCatalogInfo(INPUT2, LargerT);
-			System.out
-					.println("-------------------------------- Loaded Data in Main Memory --------------------------------");
+			OUTPUT.write(etc.CatalogString(SmallerT, LargerT));
+			System.out.println("-------------------------------- Loaded Data in Main Memory --------------------------------");
 
 			while (readability1) {
 				// Load INPUT1 buffer into Bsize-2 pages

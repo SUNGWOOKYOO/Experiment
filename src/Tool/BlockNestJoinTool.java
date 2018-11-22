@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import schema.Records;
@@ -208,6 +209,36 @@ public class BlockNestJoinTool {
 		//System.out.println(Intersection);
 		return Intersection;
 	}
+	public String CatalogString(String T1, String T2){
+		StringBuilder InfoLine = new StringBuilder();
+		Iterator<Entry<String, String>> it1 = swyootask.TablesMap.get(T1).CatalogInfo.Attr_TypePairs.entrySet().iterator();
+		Iterator<Entry<String, String>> it2 = swyootask.TablesMap.get(T2).CatalogInfo.Attr_TypePairs.entrySet().iterator();
+		if(it1.hasNext()){
+			Entry<String, String> temp = it1.next();
+			InfoLine.append(temp.getKey());
+			InfoLine.append("(");
+			InfoLine.append(temp.getValue());
+			InfoLine.append(")");
+		}
+		while(it1.hasNext()){
+			InfoLine.append("\t");
+			Entry<String, String> temp = it1.next();
+			InfoLine.append(temp.getKey());
+			InfoLine.append("(");
+			InfoLine.append(temp.getValue());
+			InfoLine.append(")");
+		}
+		while(it2.hasNext()){
+			InfoLine.append("\t");
+			Entry<String, String> temp = it2.next();
+			InfoLine.append(temp.getKey());
+			InfoLine.append("(");
+			InfoLine.append(temp.getValue());
+			InfoLine.append(")");
+		}
+		InfoLine.append("\r\n");
+		return InfoLine.toString();
+	}
 
 }
 
@@ -227,6 +258,24 @@ class JoinedRecords implements Serializable{
 		Iterator<String> it1 = Rec1.Attr_ValPairs.values().iterator();
 		Iterator<String> it2 = Rec2.Attr_ValPairs.values().iterator();
 		StringBuilder InfoLine = new StringBuilder();
+		if(it1.hasNext()){
+			InfoLine.append(it1.next());
+		}
+		while(it1.hasNext()){
+			InfoLine.append("\t");
+			InfoLine.append(it1.next());
+		}
+		while(it2.hasNext()){
+			InfoLine.append("\t");
+			InfoLine.append(it2.next());
+		}
+		InfoLine.append("\r\n");
+		return InfoLine.toString();
+	}
+	public String CatalogString(){
+		StringBuilder InfoLine = new StringBuilder();
+		Iterator<String> it1 = Rec1.Attr_ValPairs.keySet().iterator();
+		Iterator<String> it2 = Rec2.Attr_ValPairs.keySet().iterator();
 		if(it1.hasNext()){
 			InfoLine.append(it1.next());
 		}
