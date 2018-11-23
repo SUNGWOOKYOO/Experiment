@@ -28,7 +28,7 @@ select * from S, R;
 select * from R, B;
 select S.sid, R.bid from S, R;
 select B.color, R.bid from B, R;
-SELECT S.sname, S.sid, R.bid FROM S, R
+SELECT S.sname, S.sid, R.bid FROM S, R;
 select B.color, R.bid from B, R where R.bid > 102;
 select S.sname, S.sid, R.bid FROM S, R where S.age > 40;
 
