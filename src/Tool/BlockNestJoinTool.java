@@ -2,6 +2,8 @@ package Tool;
 
 import hw3.swyootask;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.LineNumberReader;
@@ -191,7 +193,6 @@ public class BlockNestJoinTool {
 	
 	public <T> List<T> intersection(List<T> list1, List<T> list2) {
         List<T> list = new ArrayList<T>();
-
         for (T t : list1) {
             if(list2.contains(t)) {
                 list.add(t);
@@ -221,7 +222,7 @@ public class BlockNestJoinTool {
 			InfoLine.append(")");
 		}
 		while(it1.hasNext()){
-			InfoLine.append("\t");
+			InfoLine.append(" ");
 			Entry<String, String> temp = it1.next();
 			InfoLine.append(temp.getKey());
 			InfoLine.append("(");
@@ -229,7 +230,7 @@ public class BlockNestJoinTool {
 			InfoLine.append(")");
 		}
 		while(it2.hasNext()){
-			InfoLine.append("\t");
+			InfoLine.append(" ");
 			Entry<String, String> temp = it2.next();
 			InfoLine.append(temp.getKey());
 			InfoLine.append("(");
@@ -239,7 +240,36 @@ public class BlockNestJoinTool {
 		InfoLine.append("\r\n");
 		return InfoLine.toString();
 	}
-
+	
+	public void ReadJoinedData(String ReadPath){
+		try {
+			LineNumberReader INPUT = new LineNumberReader(new BufferedReader(new FileReader(ReadPath)));
+			System.out.println("path setting: " + ReadPath);
+			String T = "Join";
+			ConstructCatalogInfo(INPUT, T);
+			String InfoLine;
+			int it = 0;
+			
+			while(true) {
+				InfoLine = INPUT.readLine();
+				if((InfoLine == null)) break;
+				String []values = InfoLine.split(" ");
+				swyootask.TablesMap.get(T).push_record();
+				for(int j=0 ; j< swyootask.TablesMap.get(T).CatalogInfo.Attr_TypePairs.size() ;++j) {
+					swyootask.TablesMap.get(T).Recs.get(it).push_AttrValPairs(swyootask.TablesMap.get(T).CatalogInfo.Attrs.get(j),values[j]);
+				}
+				// Debug
+				//System.out.println(swyootask.TablesMap.get(T).Recs.get(it).Attr_ValPairs.keySet());
+				//System.out.println(swyootask.TablesMap.get(T).Recs.get(it).Attr_ValPairs.values());
+				//showRecsInfo(T);
+				++it ;
+			}
+			System.out.println("TablesMap.get(\"join\") is constructed! ");
+			INPUT.close();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }
 
 class JoinedRecords implements Serializable{
@@ -262,11 +292,11 @@ class JoinedRecords implements Serializable{
 			InfoLine.append(it1.next());
 		}
 		while(it1.hasNext()){
-			InfoLine.append("\t");
+			InfoLine.append(" ");
 			InfoLine.append(it1.next());
 		}
 		while(it2.hasNext()){
-			InfoLine.append("\t");
+			InfoLine.append(" ");
 			InfoLine.append(it2.next());
 		}
 		InfoLine.append("\r\n");
@@ -280,11 +310,11 @@ class JoinedRecords implements Serializable{
 			InfoLine.append(it1.next());
 		}
 		while(it1.hasNext()){
-			InfoLine.append("\t");
+			InfoLine.append(" ");
 			InfoLine.append(it1.next());
 		}
 		while(it2.hasNext()){
-			InfoLine.append("\t");
+			InfoLine.append(" ");
 			InfoLine.append(it2.next());
 		}
 		InfoLine.append("\r\n");

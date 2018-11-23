@@ -83,13 +83,16 @@ public class Join {
 			swyootask.TablesMap.get(LargerT).CatalogInfo.records_size = 0;
 
 			System.out.println("-------------------------------- Loaded Data in Main Memory end --------------------------------");
-			// System.out.println(swyootask.TablesMap.get(LargerT).Recs);
-			// System.out.println(swyootask.TablesMap.get(LargerT).CatalogInfo.records_size);
 			// System.out.println(swyootask.TablesMap.get(SmallerT).Recs);
 			// System.out.println(swyootask.TablesMap.get(SmallerT).CatalogInfo.records_size);
-
-			OUTPUT.write("\r\n");
+			// System.out.println(swyootask.TablesMap.get(LargerT)).Recs);
+			// System.out.println(swyootask.TablesMap.get(LargerT)).CatalogInfo.records_size);
+			//OUTPUT.write("\r\n");
 			OUTPUT.close();
+			System.out.println("after join ...");
+			// Load Joined Data into Memory : swyootask.TablesMap.get("Join")
+			etc.ReadJoinedData(WritePath);
+			
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
