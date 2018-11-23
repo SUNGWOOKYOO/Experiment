@@ -862,8 +862,13 @@ public static void PrintWhereDoubleAnd() {
                         }
 
                         JoinPrint Prt = new JoinPrint();
-                        if(TablesMap.containsKey("Join")) {
-                          Prt.joinTablePrint();
+                        if(TablesMap.containsKey("Join") && (Tname.size() >= 2)) {
+                          if(WDic.isEmpty()) {
+                            Prt.joinTablePrint();
+                          }
+                          else if((WN == true) && (WS == false)&& (WAND == false)) {
+                                Prt.joinTablePrintWhereN();
+                          }
                         }
 
           System.out.println(" =========================================print end ======================================= " );
