@@ -207,7 +207,7 @@ public class BlockNestJoinTool {
 		Set<String> s2 = swyootask.TablesMap.get(T2).CatalogInfo.Attr_TypePairs.keySet();
 		Set<String> Intersection = new HashSet<String>(s1);
 		Intersection.retainAll(s2);
-		//System.out.println(Intersection);
+		//System.out.println("Joined Column: " + Intersection);
 		return Intersection;
 	}
 	public String CatalogString(String T1, String T2){
