@@ -31,3 +31,7 @@ select B.color, R.bid from B, R;
 SELECT S.sname, S.sid, R.bid FROM S, R
 select B.color, R.bid from B, R where R.bid > 102;
 select S.sname, S.sid, R.bid FROM S, R where S.age > 40;
+
+Buffer size = 4       -> 8
+Record per Page = 2   -> 4   //operate well 
+  

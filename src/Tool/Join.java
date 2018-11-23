@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.util.Iterator;
 import java.util.Set;
 
 // we can use static variables from swyootask class in task3.jj 
@@ -98,5 +99,31 @@ public class Join {
 		}
 		System.out
 				.println(" ================================= Block Nested Join end! ================================= ");
+	}
+	
+	public static void SortMergeJoin(int Bsize, int RecordPerPage) throws IOException {
+		int a = swyootask.TablesMap.get(swyootask.Tname.get(0)).CatalogInfo.records_size;
+		int b = swyootask.TablesMap.get(swyootask.Tname.get(1)).CatalogInfo.records_size;
+		String SmallerT = null;
+		String LargerT = null;
+		if (a <= b) {
+			SmallerT = swyootask.Tname.get(0);
+			LargerT = swyootask.Tname.get(1);
+		} else {
+			SmallerT = swyootask.Tname.get(1);
+			LargerT = swyootask.Tname.get(0);
+		}
+		System.out.println(" ================================= Sort Merge Join! ================================= ");
+		// PreProcessing
+		SortMergeJoinTool etc = new SortMergeJoinTool();
+		etc.ChangeODC(SmallerT, LargerT);
+		etc.ExternalSort(SmallerT, Bsize, RecordPerPage);
+		etc.ExternalSort(LargerT, Bsize, RecordPerPage);
+		
+		JoinPrint Dbug = new JoinPrint();
+		Dbug.showTable(SmallerT);
+		Dbug.showTable(LargerT);
+		
+		System.out.println(" ================================= Sort Merge Join end! ================================= ");
 	}
 }

@@ -120,4 +120,33 @@ public class JoinPrint {
 			}
 		}
 	}
+	
+	public void showTable(String T){
+		System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Debug =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+		BlockNestJoinTool TitleInfo = new BlockNestJoinTool();
+		TitleInfo.showTableInfo(T);
+		TitleInfo.showRecsInfo(T);
+		System.out.println("Table["+T+"] Info");
+		for (String Ac : swyootask.TablesMap.get(T).Recs.get(0).Attr_ValPairs.keySet()) {
+			System.out.print(Ac + "		");
+		}
+		System.out.println();
+		// each record, I have to print selected attributes
+		for (int i = 0; i < swyootask.TablesMap.get(T).CatalogInfo.records_size; i++) {
+			for (String Ac : swyootask.TablesMap.get(T).Recs.get(0).Attr_ValPairs
+					.keySet()) {
+				if (swyootask.TablesMap.get(T).CatalogInfo.Attrs
+						.contains(Ac)) {
+					System.out
+							.print(swyootask.TablesMap.get(T).Recs.get(i).Attr_ValPairs
+									.get(Ac) + "		");
+				} else {
+					System.out.print("NULL " + "		");
+				}
+			}
+			System.out.println();
+		}
+		System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Debug =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+	}
+	
 }

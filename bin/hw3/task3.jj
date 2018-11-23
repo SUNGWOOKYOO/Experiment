@@ -710,13 +710,13 @@ public static void PrintWhereDoubleAnd() {
 	public static void SortPasses(String T,int B, int passN, int RecordPerPage) throws IOException{
 		//System.out.println("=============== path "+ passN + " start! =======================");
 	  	// each pass ... 
-		int TotalPages = TablesMap.get(Tname.get(0)).CatalogInfo.records_size / RecordPerPage; // it means N
+		int TotalPages = TablesMap.get(T).CatalogInfo.records_size / RecordPerPage; // it means N
 		int PreviousTotalRuns = (int)Math.ceil((double)TotalPages / (double)Math.pow((B-1),(passN-1)));
 		//System.out.println( "previous total runs : "+ PreviousTotalRuns);
 		//System.out.println( "I will make # of runs : "+ (int)Math.ceil((double)PreviousTotalRuns/(B-1)));
 		for(int runN = 0; runN < (int)Math.ceil((double)PreviousTotalRuns/(B-1)) ; runN++) {
 		  	// T_passN_runN.txt write function 
-			swyootask.SortRuns(Tname.get(0),B,passN,runN,RecordPerPage);
+			swyootask.SortRuns(T,B,passN,runN,RecordPerPage);
 		}
 	}
 	public static void CheckSort(int B, int RecordPerPage) throws IOException{
@@ -866,9 +866,14 @@ public static void PrintWhereDoubleAnd() {
 			if((Tname.size() >= 2)) {
 			  //System.out.println("Previous join ...");
 			  //etc.JoinPrint();
+			  
 			  join.BlockNestedJoin(Bsize, RecordPerPage);
+			  
 			  //showRec(Tname.get(0));
 			  //etc.JoinPrint();
+
+			  //Join.SortMergeJoin(Bsize, RecordPerPage);
+			
 			}
 			
 			JoinPrint Prt = new JoinPrint();
