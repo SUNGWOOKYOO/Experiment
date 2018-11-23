@@ -65,5 +65,15 @@ public class SortMergeJoinTool {
 		}
 		  
 	}
-
+	
+	public String CompareJoinCol(String T1, int T1_RECNUM, String T2, int T2_RECNUM){		
+		//System.out.println(swyootask.TablesMap.get(T1).Recs.get(T1_RECNUM).Attr_ValPairs.get(swyootask.ODC));
+		//System.out.println(swyootask.TablesMap.get(T2).Recs.get(T2_RECNUM).Attr_ValPairs.get(swyootask.ODC));
+		String op1 = swyootask.TablesMap.get(T1).Recs.get(T1_RECNUM).Attr_ValPairs.get(swyootask.ODC);
+		String op2 = swyootask.TablesMap.get(T2).Recs.get(T2_RECNUM).Attr_ValPairs.get(swyootask.ODC);
+		
+		if(Double.parseDouble(op1) < Double.parseDouble(op2)) return T1;
+		else if(op1.equals(op2)) return "=";
+		else return T2;
+	}
 }

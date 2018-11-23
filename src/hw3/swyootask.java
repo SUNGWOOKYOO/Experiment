@@ -857,12 +857,12 @@ public static void PrintWhereDoubleAnd() {
                           //System.out.println("Previous join ...");
                           //etc.JoinPrint();
 
-                          join.BlockNestedJoin(Bsize, RecordPerPage);
+                          //join.BlockNestedJoin(Bsize, RecordPerPage);
 
                           //showRec(Tname.get(0));
                           //etc.JoinPrint();
 
-                          //Join.SortMergeJoin(Bsize, RecordPerPage);
+                          Join.SortMergeJoin(Bsize, RecordPerPage);
 
                         }
 

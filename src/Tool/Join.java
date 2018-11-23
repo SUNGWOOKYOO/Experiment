@@ -119,11 +119,41 @@ public class Join {
 		etc.ChangeODC(SmallerT, LargerT);
 		etc.ExternalSort(SmallerT, Bsize, RecordPerPage);
 		etc.ExternalSort(LargerT, Bsize, RecordPerPage);
-		
-		JoinPrint Dbug = new JoinPrint();
+		Debug Dbug = new Debug();
 		Dbug.showTable(SmallerT);
 		Dbug.showTable(LargerT);
-		
+		String TableWithNonPrimaryKey = Dbug.WhichTableHasPrimaryKey(SmallerT, LargerT);
+		int i =0; int j = 0;
+		int IMAX = swyootask.TablesMap.get(SmallerT).CatalogInfo.records_size;
+		int JMAX = swyootask.TablesMap.get(LargerT).CatalogInfo.records_size;
+		String result = null;
+		while(true){
+			// result has the table with smaller value of join column
+			if((i< IMAX ) && (j< JMAX )) {
+				result = etc.CompareJoinCol(SmallerT, i, LargerT, j);
+			}
+			if(result.equals("=") && (i < IMAX) && (j < JMAX)){
+				JoinRecords JR = new JoinRecords(swyootask.TablesMap.get(SmallerT).Recs.get(i), swyootask.TablesMap.get(LargerT).Recs.get(j));
+				System.out.print(JR.toString());
+				// increase the table with Non primary key pointer!! (I have to implement this part)
+				if((i< IMAX )&& (j< JMAX )) {
+					if(TableWithNonPrimaryKey.equals(SmallerT)){
+						++i;
+					}else{
+						++j;
+					}
+				}
+			}else if(result.equals(SmallerT)){
+				if((i< IMAX )&& (j< JMAX )) ++i;
+			}else if(result.equals(LargerT)){
+				if((i< IMAX )&& (j< JMAX )) ++j;
+			}
+			if((i>= IMAX )|| (j>= JMAX )){
+				//System.out.println(">> end ivalue: " + i);
+				//System.out.println("oo end jvalue: " + j);
+				break;
+			}
+		}			
 		System.out.println(" ================================= Sort Merge Join end! ================================= ");
 	}
 }
